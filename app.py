@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import pandas as pd
 import json
@@ -139,7 +140,9 @@ h1, h2, h3 {
 def load_data():
     data = []
     try:
-        with open("Sarcasm_Headlines_Dataset.json", "r") as f:
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        dataset_path = os.path.join(base_dir, "Sarcasm_Headlines_Dataset.json")
+        with open(dataset_path, "r", encoding="utf-8") as f:
             for line in f:
                 data.append(json.loads(line))
         return pd.DataFrame(data)
